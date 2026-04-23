@@ -139,12 +139,23 @@ void ld_img(char* fname);
 // at the bottom of the lc3vm.c file
 
 // task 1 PSR priority/privilege function declarations here
+bool is_user_mode();
+void user_mode();
+void supervisor_mode();
+uint16_t get_priority();
+void set_priority(uint16_t priority);
 
 // task 2 stack manipulation function declarations here
+void push(uint16_t val);
+void pop();
 
 // task 3 MCR clock latch manipulation
+void enable_clock();
+void disable_clock();
+bool is_running();
 
 // task 7 exceptions
+void exception(uint16_t i);
 
 #ifdef TEST
 } // end extern C for C++ test runner
