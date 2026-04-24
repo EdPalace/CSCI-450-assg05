@@ -1,9 +1,9 @@
 /** @file lc3vm.h
  * @brief LC-3 VM API
  *
- * @author Student Name
- * @note   cwid: 123456
- * @date   Spring 2024
+ * @author Eduardo Palacios
+ * @note   cwid: 50333534
+ * @date   Spring 2026
  * @note   ide:  g++ 8.2.0 / GNU Make 4.2.1
  *
  * Header include file for LC-3 simulator API/functions.
@@ -142,7 +142,7 @@ void ld_img(char* fname);
 bool is_user_mode();
 void user_mode();
 void supervisor_mode();
-uint16_t get_priority();
+uint16_t priority();
 void set_priority(uint16_t priority);
 
 // task 2 stack manipulation function declarations here
@@ -155,7 +155,7 @@ void disable_clock();
 bool is_running();
 
 // task 7 exceptions
-void exception(uint16_t i);
+void except(uint16_t i);
 
 #ifdef TEST
 } // end extern C for C++ test runner

@@ -1,9 +1,9 @@
 /** @file lc3vm.c
  * @brief LC-3 VM Implementation
  *
- * @author Student Name
- * @note   cwid: 123456
- * @date   Spring 2024
+ * @author Eduardo Palacios
+ * @note   cwid: 50333534
+ * @date   Spring 2026
  * @note   ide:  g++ 8.2.0 / GNU Make 4.2.1
  *
  * Implementation of LC-3 VM/Microarchitecture simulator.  Functions
@@ -51,7 +51,7 @@ uint16_t mem_read(uint16_t address)
 {
   if (is_user_mode() && (address < 0x3000 || address > 0xFDFF))
   {
-    exception(0x02);
+    except(0x02);
     return 0;
   }
   if (address == KBDR_ADDR)
@@ -80,7 +80,7 @@ void mem_write(uint16_t address, uint16_t val)
 {
   if (is_user_mode() && (address < 0x3000 || address > 0xFDFF))
   {
-    exception(0x02);
+    except(0x02);
     return;
   }
   mem[address] = val;
@@ -480,7 +480,7 @@ void rti(uint16_t i)
   (void)i;
   if (is_user_mode())
   {
-    exception(0x00);
+    except(0x00);
     return;
   }
 
@@ -511,7 +511,7 @@ void rti(uint16_t i)
 void res(uint16_t i)
 {
   (void)i;
-  exception(0x01);
+  except(0x01);
 }
 
 /** @brief trap instruction
@@ -817,7 +817,7 @@ void supervisor_mode()
  *   significant 3 bits should have any value since only priority levels
  *   0 - 7 are possible
  */
-uint16_t get_priority()
+uint16_t priority()
 { return (reg[PSR] >> 8) & 0x7; }
 
 /** @brief set priority
@@ -904,7 +904,7 @@ bool is_running()
  *   the exception vector number we use to index into the exception service
  *   vector table.
  */
-void exception(uint16_t i)
+void except(uint16_t i)
 {
   uint16_t temp = reg[PSR];
   if (is_user_mode())
